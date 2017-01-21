@@ -8,10 +8,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 //import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
-import cn.tjuscs.oj.yh.ExecuteLinuxCommand;
+import cn.tjuscs.oj.cmdHelper.ExecuteLinuxCommand;
 
-public class KindT extends FileKind {
+public class cd KindT extends FileKind {
 	public final int MAX_LINE = 100000;
 	public String[] inputFileLines = new String[MAX_LINE];
 	public String[] outputFileLines = new String[MAX_LINE];
@@ -23,7 +24,7 @@ public class KindT extends FileKind {
 		// TODO Auto-generated constructor stub
 	}
 
-	public KindT(String pid, String sid) throws IOException {
+	public KindT(String pid, String sid) throws IOException, SQLException {
 		// TODO Auto-generated constructor stub
 		super(pid, sid);
 		ExecuteLinuxCommand.execute(this.rightExePath + " < " + this.sourceFilePath + " > " + this.outputFilePath);
@@ -73,7 +74,7 @@ public class KindT extends FileKind {
 		// use the new input file to check answer
 		// if not right return
 		// get in to a file
-		ExecuteLinuxCommand.execute(this.rightExePath + " < " + changeFirstNumInput + " > " + changeFirstNumOutput);
+		ExecuteLinuxCommand.execute("timeout 2 " + this.rightExePath + " < " + changeFirstNumInput + " > " + changeFirstNumOutput);
 		BufferedReader newOBR = new BufferedReader(new FileReader(changeFirstNumOutput));
 		BufferedReader oldOBR = new BufferedReader(new FileReader(outputFilePath));
 		String news = null, olds = null;
